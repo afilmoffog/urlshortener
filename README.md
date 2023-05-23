@@ -18,5 +18,5 @@ cd /build && docker-compose build
 # Run images
 docker-compose up
 ```
-Go to POST http://127.0.0.1:8080/?source=<original_url> and take <response string>
-After, GET http://127.0.0.1:8080/<response string> and you'll be redirected to original url
+Go to POST http://127.0.0.1:8080/?source=<original_url> and take response string.
+After, GET http://127.0.0.1:8080/<response_string> and you'll be redirected to original url

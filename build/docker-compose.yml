@@ -1,0 +1,30 @@
+version: '3'
+services:
+  api:
+      build:
+        context: ..
+        dockerfile: build/Dockerfile
+      ports:
+      - "8080:8080"
+      environment:
+       - TARANTOOL_HOST=tarantool
+       - TARANTOOL_PORT=3301
+       - TARANTOOL_COLL=urls
+      links:
+      - tarantool
+  tarantool:
+      image: tarantool/tarantool
+      ports:
+      - "3301:3301"
+      volumes:
+      - /tmp/data:/var/lib/tarantool
+  tests:
+      build:
+        context: ..
+        dockerfile: build/Dockerfile.tests
+      links:
+        - tarantool
+      environment:
+      - TARANTOOL_HOST=tarantool
+      - TARANTOOL_PORT=3301
+      - TARANTOOL_COLL=urls

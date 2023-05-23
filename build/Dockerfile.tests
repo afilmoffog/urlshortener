@@ -1,0 +1,14 @@
+FROM golang:1.20
+
+WORKDIR /app
+
+COPY go.mod . 
+COPY go.sum .
+
+RUN apt-get update && apt-get install -y libssl-dev
+
+RUN go mod download
+
+COPY . .
+
+CMD ["go", "test", "./..."]
